@@ -1,0 +1,47 @@
+kodi:
+	exodus
+	mrpiracy
+	f4m tester
+	sportsdevil
+	tv-supertuga
+	fontes:
+		http://fusion.tvaddons.ag/
+		http://overdose.srve.io/addons/
+		http://srp.nu/
+
+visual code:
+	extensions:
+		c/c++
+		haskell syntax highlighting
+
+firefox:
+	extras:
+		stylish
+		FT DeepDark
+
+thunderbird mail
+sublime text
+steam
+spotify
+keepassx2
+haskell plataform
+gparted
+tlp
+
+Fontes:
+http://ppa.launchpad.net/numix/ppa/ubuntu
+
+i3:
+	zathura/evince
+	cups
+	ranger
+	gvfs
+	feh
+	pulseaudio
+	pavucontrol
+	chromium
+	networkmanager
+	network-manager-applet
+	vim
+	zsh
+	

@@ -1,0 +1,15 @@
+runtime! archlinux.vim
+
+let skip_defaults_vim=1
+
+syntax enable
+set background=dark
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+colorscheme solarized
+
+
+call plug#begin()
+Plug 'scrooloose/syntastic'
+Plug 'altercation/vim-colors-solarized'
+call plug#end() 

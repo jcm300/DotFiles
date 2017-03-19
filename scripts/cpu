@@ -1,0 +1,4 @@
+#!/bin/zsh
+cpupower frequency-set -g powersave
+cpupower frequency-set -u 2.00Ghz
+cpupower frequency-info
