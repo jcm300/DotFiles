@@ -166,7 +166,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 
 #background image
-exec --no-startup-id feh --bg-scale /home/jcm300/images/tilicho_lake_nepal_5k-1366x768.jpg
+#exec --no-startup-id feh --bg-scale /home/jcm300/images/tilicho_lake_nepal_5k-1366x768.jpg
 
 #conky
 #exec --no-startup-id conky
