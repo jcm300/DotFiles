@@ -1,12 +1,8 @@
 kodi:
 	exodus
 	mrpiracy
-	f4m tester
-	sportsdevil
-	tv-supertuga
 	fontes:
 		http://fusion.tvaddons.ag/
-		http://overdose.srve.io/addons/
 		http://srp.nu/
 
 visual code:
@@ -20,7 +16,6 @@ firefox:
 		FT DeepDark
 
 thunderbird mail
-sublime text
 steam
 spotify
 keepassx2
