@@ -2,14 +2,48 @@ runtime! archlinux.vim
 
 let skip_defaults_vim=1
 
+set number
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 syntax enable
 set background=dark
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 colorscheme solarized
 
+set wildmenu
+
+"Use spaces instead of tabs
+set expandtab
+
+"Be smart when using tabs ;)
+set smarttab
+
+"1 tab = 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+set ai "Auto indent
+
+set si "Smart indent
+
+set lazyredraw "Keeps vim from redrawing the window so often
+
+"Turn most backup options off
+set nobackup
+set nowb
+set noswapfile
 
 call plug#begin()
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
 call plug#end() 
