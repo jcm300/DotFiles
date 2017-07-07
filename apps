@@ -15,6 +15,11 @@ firefox:
 		stylish
 		FT DeepDark
 
+chromium:
+    https everywhere
+    ublock origin
+    disconnect
+
 thunderbird mail
 steam
 spotify
