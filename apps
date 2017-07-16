@@ -33,7 +33,7 @@ http://ppa.launchpad.net/numix/ppa/ubuntu
 
 i3:
 	zathura/evince
-	cups
+	cups (gtk3-print-backends, para quando a impressora nao aparece nos menus pra imprimir)
 	ranger
 	gvfs
 	feh
