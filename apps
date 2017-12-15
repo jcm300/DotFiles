@@ -12,8 +12,8 @@ visual code:
 
 firefox:
 	extras:
-		stylish
-		FT DeepDark
+		noscript
+		
 
 chromium:
     https everywhere
