@@ -1,0 +1,230 @@
+Arch Configuration
+
+Usefull links:
+https://wiki.archlinux.org/index.php/beginners'_guide
+https://wiki.archlinux.org/index.php/Installation_Guide
+https://wiki.archlinux.org/index.php/General_recommendations
+http://tutos.readthedocs.io/en/latest/source/Arch.html
+
+============================================TODO============================================
+	>Set keyboard layout
+		loadkeys pt-latin9
+		setfont Lat2-Terminus16
+	
+	>Connect to the internet via wireless
+		ip link 							#List network interfaces
+		wifi-menu -o <wireless interface>	#wlp8s0 for instance
+		ping -c 3 www.google.com 			#Test wireless connection
+	
+	>Update/Sync system clock
+		timedatectl set-ntp true
+
+	>Partitioning 							#https://wiki.archlinux.org/index.php/partitioning
+		lsblk								#List storage devices and partitions
+		parted	/dev/sdx					#Use gparted to partition the drive
+		
+	>Formating the partitions
+		mkfs.ext4 /dev/sdxY				#Home / Root				
+	
+	>Mounting the partitions
+		mount /dev/sdxY /mnt 				#Mount root partition
+		mkdir -p /mnt/boot 				#Make the boot destination
+		mount /dev/sdxY	/mnt/boot 			#Mount the partition boot
+	
+	>Enable Mirrors 						#https://wiki.archlinux.org/index.php/Mirror
+		nano /etc/pacman.d/mirrorlist				#Edit the Mirror list
+	
+	>Install base packages
+		pacstrap -i /mnt base base-devel
+
+	genfstab -U /mnt >> /mnt/etc/fstab		
+	arch-chroot /mnt /bin/bash
+    
+    >Time
+        tzselect
+        ln -sf /usr/share/zoneinfo/Zone/SubZone /etc/localtime
+        hwclock --systohc --utc
+
+	>Locale
+		nano /etc/locale.gen 					#Uncomment en-US.UTF-8
+		locale-gen
+		nano /etc/vconsole.conf
+			KEYMAP=pt-latin9
+			FONT=Lat2-Terminus16	
+		nano /etc/locale.conf
+            LANG=pt_PT.UTF-8
+
+    >Hostname     #https://wiki.archlinux.org/index.php/beginners'_guide#Hostname
+        nano /etc/hostname                  #Set hostname
+        nano /etc/hosts
+    
+    >Wireless Setup
+        sudo pacman -S iw wpa_supplicant dialog wpa_actiond ifplugd zsh
+    
+    mkinitcpio -p linux
+    sudo pacman -S vim
+
+    >User Management
+        passwd                          #Set sudo password
+        useradd -m -G users wheel -s /usr/bin/zsh <user>      #Add new user
+        sudo pacman -S vim                  #Install vim for visudo
+        visudo                          #Uncomment %wheel ALL=(ALL) ALL
+        chsh -s /usr/bin/zsh                    #Change default shell to zsh
+        passwd <user>                       #Set password for user
+
+	>Bootloader Install 						#https://wiki.archlinux.org/index.php/Systemd-boot
+		bootctl install
+		sudo pacman -S intel-ucode
+		cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/arch.conf
+		nano /boot/loader/entries/arch.conf 			
+            options root=/dev/sdxY rw
+        nano /boot/loader/loader.conf
+            default  arch
+            timeout  4
+            editor   0    
+    	nano /boot/loader/entries/arch.conf #Follow instructions in link
+	    Enable microcode updates	#https://wiki.archlinux.org/index.php/Microcode#Enabling_Intel_microcode_updates
+	
+	>Rebooting and unmounting
+		exit							#Leave chroot environment
+		umount -R /mnt 						#Umount partitions as a safety measure
+		reboot							
+
+============================================Initial Setup============================================
+
+	>CPU Frequency Scaling
+		sudo pacman -S cpupower			#Install cpu frequency management tool
+		sudo cpupower frequency-set -u XGHz	#Limit cpu maximum frequency to X GHz
+
+	>Graphic Environment
+		pacman -S xorg xorg-xinit xorg-twm mesa i3 dmenu
+            #install graphic drivers (bumblebee and more)
+			#Install reccomended packages
+			#Write down nvidia driver for later reference
+		vim .xinitrc						#Set Xorg to run i3	
+			exec i3
+
+	>Configure the AUR
+		sudo nano /etc/pacman.conf
+			Append the following to the end of the file
+			[archlinuxfr]
+			SigLevel = Never
+			Server = http://repo.archlinux.fr/$arch
+		sudo pacman -Syu
+		sudo pacman -S yaourt
+		yaourt -S pacaur
+		sudo pacman -Rns yaourt
+		Remove the appended text from pacman.conf
+
+	>Audio Drivers
+		sudo alsa-firmware alsa-utils alsa-plugins pulseaudio-alsa pulseaudio
+
+
+======================================Package Install======================================
+
+	>Power Management
+		sudo pacman -S tlp
+		sudo tlp start
+
+=======================================Configurations======================================
+
+	>Screenbrightness
+		pacaur -S light-git
+
+	>Touchpad
+		https://wiki.archlinux.org/index.php/Touchpad_Synaptics
+		https://wiki.archlinux.org/index.php/Libinput#Touchpad_tapping
+		https://bbs.archlinux.org/viewtopic.php?id=121153				#Keep an eye out for the typo
+		https://bbs.archlinux.org/viewtopic.php?id=213795
+
+	Start the graphic environment with startx
+	Copy DotFiles to home
+	Open a terminal and copy i3 config files to .config/i3/ and i3status.conf to ...
+	Reload i3
+
+	>Fonts
+		yaourt font-awesome
+
+	>Shell
+		chsh -s /usr/bin/zsh 		#Change default shell
+		sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"	#Oh-My-Zsh
+		cp DotFiles/.zshrc .		#Zsh config
+
+	>i3-lock
+		Install i3lock-fancy-multimonitors-git from the aur with the blur option
+
+	>Dev environment configuration
+		cabal update
+		cabal install gloss
+
+	>Systemd cpupower
+		Create a systemd service in /etc/systemd/system/powerManager.service for persistence frequency control across reboots, template in MEOCloud
+		systemctl enable powerManager.service --now
+		systemctl status powerManager.service
+
+	>Hardware Config
+		Configure NTFS to be able to write to external hard-drive 
+			-http://unix.stackexchange.com/questions/132273/why-cant-i-write-on-external-hard-disk
+			-https://wiki.archlinux.org/index.php/NTFS-3G
+
+============================================To Install============================================
+    >System Related:
+        Bumblebee(primus)
+        Intel Microcode
+        Unzip
+        TLP
+        OpenSSH
+        Arandr
+    >Terminal
+        Zsh/Oh-My-Zsh
+    >Internet
+        Firefox
+    >Multimedia
+        NCMPCPP/MPD/MPC
+        MPlayer
+        MPS-Youtube
+        Spotify
+        GIMP
+    >Development
+        Haskell-Platform
+        VSCode
+        Vim
+	Neovim
+        SpaceEmacs
+        Apache
+    >Office
+        WPS Documents
+        Zathura/Zathura-pdf-poppler
+        Latex(texlive-core)
+    >Others
+        Keepassx2
+        Ranger
+        Feh 
+        Git
+    
+    wps-office
+    discord
+    ghc cabal-install happy alex haskell-haddock-api haskell-haddock-library
+    unzip openssh arandr mplayer keepassx2 mpd mpc scrot
+    gparted
+    netbeans
+    acestream
+    gimp
+    impressora(hplip)
+    java
+    kodi
+    firefox
+    mysql
+    mongodb
+    neo4j
+    simple-scan
+    steam
+    thunderbird
+    nc
+    discord
+    mpv
+    spotify
+    wireshark
+    telegram
+    vlc
+    signal
