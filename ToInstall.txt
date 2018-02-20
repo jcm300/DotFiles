@@ -38,7 +38,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 		pacstrap -i /mnt base base-devel
 
 	genfstab -U /mnt >> /mnt/etc/fstab		
-	arch-chroot /mnt /bin/bash
+	arch-chroot /mnt
     
     >Time
         tzselect
@@ -56,7 +56,11 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 
     >Hostname     #https://wiki.archlinux.org/index.php/beginners'_guide#Hostname
         nano /etc/hostname                  #Set hostname
+            myhostname
         nano /etc/hosts
+            127.0.0.1	localhost
+            ::1		    localhost
+            127.0.1.1	myhostname.localdomain	myhostname
     
     >Wireless Setup
         sudo pacman -S iw wpa_supplicant dialog wpa_actiond ifplugd zsh
