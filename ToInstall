@@ -142,6 +142,9 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
     >Low Batery Notifications
         sudo pacman -S dunst cronie
         script on github (lowBattery.sh), use crontab to run the script on x to x minutes
+        crontab -e
+            */5 * * * * /home/jcm300/Files/Scripts/lowBattery.sh
+
 
 	Start the graphic environment with startx
 	Copy DotFiles to home
