@@ -140,7 +140,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         sudo pacman -S asus-kbd-backlight
 
     >Low Batery Notifications
-        sudo pacman -S dunst crontab
+        sudo pacman -S dunst cronie
         script on github (lowBattery.sh), use crontab to run the script on x to x minutes
 
 	Start the graphic environment with startx
@@ -157,6 +157,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
     >System Related:
         bumblebee(primus)
         unzip
+        zip
         tlp
         openssh
         gparted
@@ -165,6 +166,10 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         network-manager-applet
         cups (gtk3-print-backends, para quando a impressora nao aparece nos menus pra imprimir)
         xorg-xrandr #projetar, ajuda: xrandr --help
+        acpi
+        cpupower
+        ntfs-3g
+        p7zip
     >Terminal
         zsh
         oh-my-zsh
@@ -196,6 +201,16 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         mongodb
         neo4j
         wireshark
+        anttweakbar
+        core
+        freeglut
+        cmake
+        gcc
+        mssql-server
+        mssql.tools
+        nmap
+        traceroute
+        graphviz
     >Office
         wps-office
         zathura/zathura-pdf-poppler
@@ -215,6 +230,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
                 http://fusion.tvaddons.ag/
                 http://srp.nu/
         simple-scan
+        simplescreenrecorder
         steam
         thunderbird
         nc
@@ -222,6 +238,9 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         signal
         android-file-transfer
         dunst
-        crontab
+        cronie
         light-git
         asus-kbd-backlight
+        adobe-source-code-pro-fonts
+        ttf-liberation
+        xfce4-terminal
