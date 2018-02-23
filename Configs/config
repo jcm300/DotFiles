@@ -172,7 +172,7 @@ bindsym XF86MonBrightnessUp exec light -A 5 #increase brightness
 #bindsym ? exec light -S 0 #disable screen 
 
 #disable/ativate touchpad
-bindsym XF86TouchpadToggle exec /home/jcm300/Files/scripts/toggletouchpad.sh # toggle touchpad
+bindsym XF86TouchpadToggle exec /home/jcm300/Files/Scripts/toggletouchpad.sh # toggle touchpad
 
 #keyboard bright control with asus-kbd-backlight
 bindsym XF86KbdBrightnessDown exec asus-kbd-backlight down
