@@ -6,7 +6,7 @@ https://wiki.archlinux.org/index.php/Installation_Guide
 https://wiki.archlinux.org/index.php/General_recommendations
 http://tutos.readthedocs.io/en/latest/source/Arch.html
 
-============================================TODO============================================
+============================================TODO===========================================
 	>Set keyboard layout
 		loadkeys pt-latin9
 		setfont Lat2-Terminus16
@@ -46,7 +46,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         hwclock --systohc --utc
 
 	>Locale
-		nano /etc/locale.gen 					#Uncomment en-US.UTF-8
+		nano /etc/locale.gen 					#Uncomment pt-PT.UTF-8
 		locale-gen
 		nano /etc/vconsole.conf
 			KEYMAP=pt-latin9
@@ -63,14 +63,13 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
             127.0.1.1	myhostname.localdomain	myhostname
     
     >Wireless Setup
-        sudo pacman -S iw wpa_supplicant dialog wpa_actiond ifplugd zsh
+        sudo pacman -S iw wpa_supplicant dialog wpa_actiond ifplugd zsh vim
     
     mkinitcpio -p linux
-    sudo pacman -S vim
 
     >User Management
         passwd                          #Set sudo password
-        useradd -m -G users wheel -s /usr/bin/zsh <user>      #Add new user
+        useradd -m -g users -G wheel -s /usr/bin/zsh <user>      #Add new user
         sudo pacman -S vim                  #Install vim for visudo
         visudo                          #Uncomment %wheel ALL=(ALL) ALL
         chsh -s /usr/bin/zsh                    #Change default shell to zsh
@@ -94,7 +93,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 		umount -R /mnt 						#Umount partitions as a safety measure
 		reboot							
 
-============================================Initial Setup============================================
+====================================Initial Setup==========================================
 
 	>CPU Frequency Scaling
 		sudo pacman -S cpupower			#Install cpu frequency management tool
@@ -118,7 +117,6 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 		sudo pacman -S yaourt
 		yaourt -S pacaur
 		sudo pacman -Rns yaourt
-		Remove the appended text from pacman.conf
 
 	>Audio Drivers
 		sudo alsa-firmware alsa-utils alsa-plugins pulseaudio-alsa pulseaudio
@@ -136,99 +134,94 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 		pacaur -S light-git
 
 	>Touchpad
-		https://wiki.archlinux.org/index.php/Touchpad_Synaptics
-		https://wiki.archlinux.org/index.php/Libinput#Touchpad_tapping
-		https://bbs.archlinux.org/viewtopic.php?id=121153				#Keep an eye out for the typo
-		https://bbs.archlinux.org/viewtopic.php?id=213795
+        script on github to toogle touchpad (toogletouchpad.sh).
+
+    >Keyboard Backlight
+        sudo pacman -S asus-kbd-backlight
+
+    >Low Batery Notifications
+        sudo pacman -S dunst crontab
+        script on github (lowBattery.sh), use crontab to run the script on x to x minutes
 
 	Start the graphic environment with startx
 	Copy DotFiles to home
-	Open a terminal and copy i3 config files to .config/i3/ and i3status.conf to ...
+	Open a terminal and copy i3 config files to .config/i3/ and i3status.conf to .config/i3/i3status/
 	Reload i3
-
-	>Fonts
-		yaourt font-awesome
 
 	>Shell
 		chsh -s /usr/bin/zsh 		#Change default shell
-		sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"	#Oh-My-Zsh
+		Install Oh-My-Zsh
 		cp DotFiles/.zshrc .		#Zsh config
 
-	>i3-lock
-		Install i3lock-fancy-multimonitors-git from the aur with the blur option
-
-	>Dev environment configuration
-		cabal update
-		cabal install gloss
-
-	>Systemd cpupower
-		Create a systemd service in /etc/systemd/system/powerManager.service for persistence frequency control across reboots, template in MEOCloud
-		systemctl enable powerManager.service --now
-		systemctl status powerManager.service
-
-	>Hardware Config
-		Configure NTFS to be able to write to external hard-drive 
-			-http://unix.stackexchange.com/questions/132273/why-cant-i-write-on-external-hard-disk
-			-https://wiki.archlinux.org/index.php/NTFS-3G
-
-============================================To Install============================================
+=======================================To Install==========================================
     >System Related:
-        Bumblebee(primus)
-        Intel Microcode
-        Unzip
-        TLP
-        OpenSSH
-        Arandr
+        bumblebee(primus)
+        unzip
+        tlp
+        openssh
+        gparted
+        pavucontrol
+        networkmanager
+        network-manager-applet
+        cups (gtk3-print-backends, para quando a impressora nao aparece nos menus pra imprimir)
+        xorg-xrandr #projetar, ajuda: xrandr --help
     >Terminal
-        Zsh/Oh-My-Zsh
+        zsh
+        oh-my-zsh
     >Internet
-        Firefox
+        firefox:
+            noscript
+            https everywhere
+            ublock origin
+            disconnect
+            Firefox Multi-Account Containers
+        chromium
     >Multimedia
-        NCMPCPP/MPD/MPC
-        MPlayer
-        MPS-Youtube
-        Spotify
-        GIMP
+        mps-youtube
+        spotify
+        gimp
+        mpv
+        acestream
+        vlc
     >Development
-        Haskell-Platform
-        VSCode
-        Vim
-	Neovim
-        SpaceEmacs
-        Apache
+        stack #Haskell-Platform
+        visual-studio-code:
+            c/c++
+            haskell syntax highlighting
+        vim:
+            vim-plug
+        netbeans
+        java(jdk)
+        mysql
+        mongodb
+        neo4j
+        wireshark
     >Office
-        WPS Documents
-        Zathura/Zathura-pdf-poppler
+        wps-office
+        zathura/zathura-pdf-poppler
         Latex(texlive-core)
     >Others
         Keepassx2
-        Ranger
-        Feh 
-        Git
-    
-    wps-office
-    discord
-    ghc cabal-install happy alex haskell-haddock-api haskell-haddock-library
-    unzip openssh arandr mplayer keepassx2 mpd mpc scrot
-    gparted
-    netbeans
-    acestream
-    gimp
-    impressora(hplip)
-    java
-    kodi
-    firefox
-    mysql
-    mongodb
-    neo4j
-    simple-scan
-    steam
-    thunderbird
-    nc
-    discord
-    mpv
-    spotify
-    wireshark
-    telegram
-    vlc
-    signal
+        ranger
+        feh 
+        git 
+        discord
+        scrot
+        impressora(hplip)
+        kodi:
+            exodus
+            mrpiracy
+            fontes:
+                http://fusion.tvaddons.ag/
+                http://srp.nu/
+        simple-scan
+        steam
+        thunderbird
+        nc
+        telegram
+        signal
+        android-file-transfer
+        dunst
+        crontab
+        light-git
+        asus-kbd-backlight
