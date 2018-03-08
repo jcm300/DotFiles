@@ -144,7 +144,9 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         script on github (lowBattery.sh), use crontab to run the script on x to x minutes
         crontab -e
             */5 * * * * /home/jcm300/Files/Scripts/lowBattery.sh
-
+    
+    >zathura config
+    cp zathurarc /home/jcm300/.config/zathura/
 
 	Start the graphic environment with startx
 	Copy DotFiles to home
@@ -235,7 +237,8 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         simple-scan
         simplescreenrecorder
         steam
-        thunderbird
+        thunderbird:
+            GNotifier
         nc
         telegram
         signal
