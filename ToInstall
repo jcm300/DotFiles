@@ -175,6 +175,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         cpupower
         ntfs-3g
         p7zip
+        arandr
     >Terminal
         zsh
         oh-my-zsh
