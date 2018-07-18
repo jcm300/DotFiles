@@ -110,13 +110,10 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 	>Configure the AUR
 		sudo nano /etc/pacman.conf
 			Append the following to the end of the file
-			[archlinuxfr]
-			SigLevel = Never
-			Server = http://repo.archlinux.fr/$arch
+			[archlinuxcn]
+			Server = https://cdn.repo.archlinuxcn.org/$arch
 		sudo pacman -Syu
-		sudo pacman -S yaourt
-		yaourt -S pacaur
-		sudo pacman -Rns yaourt
+		sudo pacman -S yay
 
 	>Audio Drivers
 		sudo alsa-firmware alsa-utils alsa-plugins pulseaudio-alsa pulseaudio
@@ -131,13 +128,13 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 =======================================Configurations======================================
 
 	>Screenbrightness
-		pacaur -S light-git
+		yay -S light-git
 
 	>Touchpad
         script on github to toogle touchpad (toogletouchpad.sh).
 
     >Keyboard Backlight
-        sudo pacman -S asus-kbd-backlight
+        yay -S asus-kbd-backlight
 
     >Low Batery Notifications
         sudo pacman -S dunst cronie
@@ -161,8 +158,6 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
 =======================================To Install==========================================
     >System Related:
         bumblebee(primus)
-        unzip
-        zip
         tlp
         openssh
         gparted
@@ -176,6 +171,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         ntfs-3g
         p7zip
         arandr
+    
     >Terminal
         zsh
         oh-my-zsh
@@ -186,8 +182,8 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
             ublock origin
             disconnect
             Firefox Multi-Account Containers
-	    QuantumVim
-	    DuckDuckGo Privacy Essentials
+	        QuantumVim
+	        DuckDuckGo Privacy Essentials
         chromium
     >Multimedia
         mps-youtube
@@ -214,8 +210,6 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         freeglut
         cmake
         gcc
-        mssql-server
-        mssql.tools
         nmap
         traceroute
         graphviz
@@ -224,7 +218,7 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         zathura/zathura-pdf-poppler
         Latex(texlive-core)
     >Others
-        Keepassx2
+        Keepassxc
         ranger
         feh 
         git 
@@ -252,4 +246,8 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         asus-kbd-backlight
         adobe-source-code-pro-fonts
         ttf-liberation
-        xfce4-terminal
+        terminator
+        stremio:
+            Popcorn Time
+            Juan Carlos
+            RARBG
