@@ -28,6 +28,10 @@ set ai "Auto indent
 
 set si "Smart indent
 
+" Keep selection after index
+vnoremap < <gv
+vnoremap > >gv
+
 set lazyredraw "Keeps vim from redrawing the window so often
 
 "Turn most backup options off
