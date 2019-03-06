@@ -1,0 +1,3 @@
+# ZSH
+
+Move .zshrc to ~/

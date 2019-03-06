@@ -1,0 +1,3 @@
+# Xorg
+
+Move .xinitrc to ~/
