@@ -3,10 +3,8 @@ runtime! archlinux.vim
 let skip_defaults_vim=1
 
 set number
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
+" Enable completion where available.(ALE)
 let g:ale_completion_enabled = 1
 
 syntax enable
@@ -39,9 +37,27 @@ set nobackup
 set nowb
 set noswapfile
 
+" control+n to open nerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+" control+p for fzf
+map <C-p> :Files<CR>
+
+"vim markdown
+"LaTeX math
+let g:vim_markdown_math = 1
+
 call plug#begin()
 Plug 'w0rp/ale'
-"Plug 'altercation/vim-colors-solarized'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'digitaltoad/vim-pug'
+Plug 'scrooloose/nerdcommenter'
+Plug 'jelera/vim-javascript-syntax'
+"Plug 'terryma/vim-multiple-cursors'
 call plug#end() 
