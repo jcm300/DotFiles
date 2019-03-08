@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -a
+
+function print {
+    amixer="$(amixer sget Master | grep 'Left:')"
+    
+    volume="$(echo $amixer | awk -F'[][]'  '{ print $2 }')"
+    status="$(echo $amixer | awk -F'[][]'  '{ print $4 }')"
+
+    if [[ $status =~ "on" ]] ; then
+        out=" $volume"
+    elif [[ $status =~ "off" ]] ; then
+        out=" ($volume)"
+    fi
+
+    echo $out
+}
+
+print
+while read -r EVENT; do
+    print
+done < <(pactl subscribe | stdbuf -oL grep change)

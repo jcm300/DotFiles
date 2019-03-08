@@ -1,5 +1,3 @@
 # i3
 
-Move config to ~/.config/i3
-
-Move i3status.conf to ~/.config/i3status
+Move files to ~/.config/i3

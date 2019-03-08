@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+acpi="$(acpi -b)"
+
+acpi=${acpi##"Battery 0:"}
+
+percent="${acpi#*,}"
+percent="${percent%:*}"
+percent="${percent/,/}"
+status="${acpi%%,*}"
+
+out=""
+
+if [[ $status =~ "Discharging" ]] ; then
+	out=" $percent"
+elif [[ $status =~ "Charging" ]] ; then
+	out=" $percent"
+elif [[ $status =~ "Not charging" ]] ; then
+	out=" $percent"
+fi
+
+echo $out

@@ -1,19 +1,21 @@
 runtime! archlinux.vim
 
-let skip_defaults_vim=1
+" Check if the plugin manager is installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set number
+let skip_defaults_vim=1
 
 " Enable completion where available.(ALE)
 let g:ale_completion_enabled = 1
 
+" Color related configs
 syntax enable
+set number
 set background=dark
-
-set wildmenu
-
-"Use spaces instead of tabs
-set expandtab
 
 "Be smart when using tabs ;)
 set smarttab
@@ -22,13 +24,23 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-set ai "Auto indent
+"Use spaces instead of tabs
+set expandtab
 
+set ai "Auto indent
 set si "Smart indent
 
 " Keep selection after index
 vnoremap < <gv
 vnoremap > >gv
+
+"Search options
+set ignorecase  "Ignore case when searching
+set incsearch   "Instant search
+
+"Command listing
+set wildmenu
+set path+=**
 
 set lazyredraw "Keeps vim from redrawing the window so often
 
@@ -37,27 +49,67 @@ set nobackup
 set nowb
 set noswapfile
 
+"Update file when modified outside of vim
+set autoread
+
 " control+n to open nerdTree
 map <C-n> :NERDTreeToggle<CR>
 
 " control+p for fzf
-map <C-p> :Files<CR>
+"map <C-p> :Files<CR>
 
 "vim markdown
 "LaTeX math
-let g:vim_markdown_math = 1
+"let g:vim_markdown_math = 1
+
+" lightline setup
+set laststatus=2
+set noshowmode
+
+set mat=2 "How many tenths of a second to blink
+set encoding=utf-8  " The encoding displayed
+set fileencoding=utf-8  " The encoding written to file
+set showmatch " highlight the matching bracket or brace when the cursor is over one
+set nocompatible " Necesary for lots of cool vim things
+set ttyfast " Improve speed of vim
+
+" set c syntax to jasmin files
+au BufNewFile,BufRead,BufReadPost *.jazz set filetype=jazz
+au BufNewFile,BufRead,BufReadPost *.jazz set syntax=c
+au BufNewFile,BufRead,BufReadPost *.japp set filetype=japp
+au BufNewFile,BufRead,BufReadPost *.japp set syntax=c
+
+" Each time a new or existing file is edited, Vim will try to recognize the type of the file and set the 'filetype' option
+" loads the file "ftplugin.vim" in 'runtimepath
+" loads the file "indent.vim" in 'runtimepath'
+filetype plugin indent on
 
 call plug#begin()
+
+" Lint Engine
 Plug 'w0rp/ale'
+" allows to use <Tab> for all your insert completion needs
 Plug 'ervandew/supertab'
+" Insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" fzf is a general-purpose command-line fuzzy finder
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+" file system explorer
 Plug 'scrooloose/nerdtree'
+" Align text automatic
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+" Syntax highlighting, matching rules and mappings for the original Markdown and extensions
+"Plug 'plasticboy/vim-markdown'
+"  syntax highlighting for Pug templates
 Plug 'digitaltoad/vim-pug'
+" Comment functions so powerful
 Plug 'scrooloose/nerdcommenter'
+" Enhanced JavaScript Syntax
 Plug 'jelera/vim-javascript-syntax'
+" multiple cursors
 "Plug 'terryma/vim-multiple-cursors'
+" light and configurable statusline/tabline 
+Plug 'itchyny/lightline.vim'
+
 call plug#end() 
