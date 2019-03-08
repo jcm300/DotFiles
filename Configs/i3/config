@@ -223,3 +223,6 @@ bindsym $mod+Print exec "sleep 0.2; scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~
 
 # Print screen focused window
 bindsym ctrl+Print exec scrot -u '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/'
+
+# Gen QR Code from clipboard
+bindsym ctrl+space exec bash ~/.config/i3/genQRCodeFromClipboard
