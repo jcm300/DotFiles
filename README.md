@@ -1,4 +1,4 @@
-# Files
+# DotFiles
 
 This rep have:	
 - Arch Linux installation step by step guide;
