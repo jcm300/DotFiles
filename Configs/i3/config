@@ -44,7 +44,11 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# switching window with win+tab
+bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 # change focus
 bindsym $mod+j focus left
@@ -153,18 +157,29 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #2b83a6 #2b83a6 #ffffff #dddddd   #2b83a6
+client.focused_inactive #212121 #212121 #86888c #292d2e   #5a5a5a
+client.unfocused        #212121 #212121 #86888c #292d2e   #5a5a5a
+client.urgent           #d64e4e #d64e4e #ffffff #d64e4e   #d64e4e
+client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
+client.background       #212121
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     i3bar_command i3bar -t
 	colors {
-		background #00002c00
-	    separator #00002c00
-		#                  border       background      text
-		focused_workspace  #00002c00    #00002c00       #f3f4f5
-		inactive_workspace #00002c00    #00002c00       #676E7D
-		urgent_workspace   #00708999    #00708999       #f3f4f5
+        background  #212121
+        statusline  #dddddd
+        separator   #212121
+        # class             border  backgr. text
+        focused_workspace   #2b83a6 #2b83a6 #ffffff
+        active_workspace    #212121 #212121 #ffffff
+        inactive_workspace  #212121 #212121 #86888c
+        urgent_workspace    #d64e4e #d64e4e #ffffff
+        binding_mode        #229c56 #229c56 #ffffff
     }
 }
 

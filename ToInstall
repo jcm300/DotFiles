@@ -256,3 +256,5 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         otf-font-awesome
         i3lock-fancy
         Alacritty
+        rofi
+        bat
