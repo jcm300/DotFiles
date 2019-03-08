@@ -171,9 +171,9 @@ bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     i3bar_command i3bar -t
 	colors {
-        background  #212121
+        background  #020100
         statusline  #dddddd
-        separator   #212121
+        separator   #020100
         # class             border  backgr. text
         focused_workspace   #2b83a6 #2b83a6 #ffffff
         active_workspace    #212121 #212121 #ffffff
