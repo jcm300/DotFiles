@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -a
-
 function print {
     amixer="$(amixer sget Master | grep 'Left:')"
     
@@ -18,6 +16,8 @@ function print {
 }
 
 print
-while read -r EVENT; do
+
+pactl subscribe | grep --line-buffered -P "change.*?sink" | while read line
+do
     print
-done < <(pactl subscribe | stdbuf -oL grep change)
+done
