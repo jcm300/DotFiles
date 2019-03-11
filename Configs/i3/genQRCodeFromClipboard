@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
-xclip -o | qrencode -o "/tmp/qrencode.png" -s 40 -m 1 
+file="/tmp/qrencode.png"
 
-feh /tmp/qrencode.png
+xclip -o | qrencode -o $file -s 40 -m 1 
+
+feh $file
+
+rm $file
