@@ -13,7 +13,7 @@ partial_backup() {
     openssl aes-256-cbc -a -salt -pbkdf2 -in keys.tar -out $bf_local/keys.tar.aes
     rm keys.tar
     #extract
-    #openssl aes-256-cbc -d -salt -pbkdf2 -in keys.tar.aes -out keys.tar
+    #openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
     #tar -xvf keys.tar
 }
 
