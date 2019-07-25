@@ -177,13 +177,25 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         oh-my-zsh
     >Internet
         firefox:
-            noscript
-            https everywhere
-            ublock origin
-            disconnect
-            Firefox Multi-Account Containers
-	        QuantumVim
-	        DuckDuckGo Privacy Essentials
+            - addons:
+                noscript
+                https everywhere
+                ublock origin
+                disconnect
+                Firefox Multi-Account Containers
+                QuantumVim
+                DuckDuckGo Privacy Essentials
+                Decentraleyes
+                Privacy Settings
+                Privacy Badger
+                Joplin Web Clipper
+            - See: https://github.com/intika/Librefox
+            - Fixed Separators:
+                Discord
+                Facebook Messenger
+                Github
+                Linkedin
+                Reddit
         chromium
     >Multimedia
         mps-youtube
@@ -191,12 +203,43 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         gimp
         mpv
         acestream
+            - acestream-engine
+            - acestream-launcher
         vlc
     >Development
         stack #Haskell-Platform
         visual-studio-code:
-            c/c++
-            haskell syntax highlighting
+            Ansible
+            ANTLR4 grammar syntax support
+            C/C++
+            C#
+            CMake Tools
+            Debugger for Chrome
+            Debugger for Java
+            Docker
+            GitLens — Git supercharged
+            Gradle Language Support
+            Haskell Syntax Highlighting
+            Java Dependency Viewer
+            Java Extension Pack
+            Java Test Runner
+            Jinja
+            Language Support for Java(TM) by Red Hat
+            LaTeX Workshop
+            Markdown All in One
+            Maven for Java
+            npm
+            PlantUML
+            Python
+            Ruby
+            Stardog RDF Grammars
+            TODO Highlight
+            Todo Tree
+            Vetur
+            Vim
+            vscode-cudacpp
+            XML Tools
+            YAML
         vim:
             vim-plug
         netbeans
@@ -240,6 +283,8 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         telegram
         signal
         android-file-transfer
+        android-tools
+        android-udev
         dunst
         cronie
         light-git
@@ -261,3 +306,46 @@ http://tutos.readthedocs.io/en/latest/source/Arch.html
         xcursor-openzone
         mendeleydesktop
         qrencode
+        root (c++ framework)
+        ansible
+        baobab
+        caffeine
+        clang
+        cmake
+        duplicity
+        electron
+        emacs
+        evince
+        free-glut
+        gdb
+        git
+        glew
+        htop
+        inkspace
+        jdk-openjdk
+        jre-openjdk
+        joplin
+        lm_sensors
+        lynx
+        mendeley
+        minecraft-launcher
+        mongodb-bin
+        nodejs
+        npm
+        octave
+        openssh
+        openmpi
+        postman-bin
+        protege
+        python
+        qrenconde
+        redshift
+        ruby
+        saxon-he
+        transmission
+        vagrant
+        valgrind
+        virtualgl
+        visual-studio-code-bin
+        wine
+        xcursor-openzone

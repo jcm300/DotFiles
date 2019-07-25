@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export GPG_TTY=$(tty)
+
+export PATH=$PATH:"/opt/graphdb-ee-8.9.0/bin/:/opt/cuda/bin/:/home/jcm300/Reps/spln-2018-ii/bin/:/opt/intel/compilers_and_libraries_2019.3.199/linux/bin/intel64/:/opt/intel/compilers_and_libraries_2019.3.199/linux/mpi/intel64/bin/"
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/jcm300/.oh-my-zsh

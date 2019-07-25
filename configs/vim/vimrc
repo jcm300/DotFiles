@@ -111,5 +111,7 @@ Plug 'jelera/vim-javascript-syntax'
 "Plug 'terryma/vim-multiple-cursors'
 " light and configurable statusline/tabline 
 Plug 'itchyny/lightline.vim'
+"vue highlight
+Plug 'posva/vim-vue'
 
 call plug#end() 
