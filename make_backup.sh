@@ -4,6 +4,15 @@ partial_backup() {
     #firefox backup
     cp -r /home/$username/.mozilla/firefox/*.default $bf_local
 
+    #thunderbird backup
+    tar -cf thunderbird.tar -C $home .thunderbird
+    gpg -c thunderbird.tar
+    mv thunderbird.tar.gpg $bf_local
+    rm thunderbird.tar
+    #extract
+    #gpg thunderbird.tar.gpg
+    #tar -xvf thunderbird.tar
+
     #home directory backup without hidden files on top-level
     mkdir $bf_home
     rsync -a --exclude="/${bf_local##*/}" --exclude="/.*" $home $bf_home
