@@ -29,7 +29,7 @@ partial_backup() {
     sudo tar -cf networkManager.tar -C /etc/NetworkManager/ system-connections
     gpg -c networkManager.tar
     mv networkManager.tar.gpg $bf_local
-    rm networkManager.tar
+    sudo rm networkManager.tar
     #extract
     #gpg networkManager.tar.gpg
     #tar -xvf networkManager.tar
@@ -38,7 +38,7 @@ partial_backup() {
     sudo tar -cf protonVPN.tar -C $home .protonvpn-cli
     gpg -c protonVPN.tar
     mv protonVPN.tar.gpg $bf_local
-    rm protonVPN.tar
+    sudo rm protonVPN.tar
     #extract
     #gpg protonVPN.tar.gpg
     #tar -xvf protonVPN.tar
