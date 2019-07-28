@@ -24,10 +24,28 @@ partial_backup() {
     #extract
     #openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
     #tar -xvf keys.tar
+
+    #NetworkManager
+    sudo tar -cf networkManager.tar -C /etc/NetworkManager/ system-connections
+    gpg -c networkManager.tar
+    mv networkManager.tar.gpg $bf_local
+    rm networkManager.tar
+    #extract
+    #gpg networkManager.tar.gpg
+    #tar -xvf networkManager.tar
+
+    #ProtonVPN
+    sudo tar -cf protonVPN.tar -C $home .protonvpn-cli
+    gpg -c protonVPN.tar
+    mv protonVPN.tar.gpg $bf_local
+    rm protonVPN.tar
+    #extract
+    #gpg protonVPN.tar.gpg
+    #tar -xvf protonVPN.tar
 }
 
 configs_backup() {
-    mkdir $1 $1/vim $1/xorg $1/alacritty $1/dunst $1/i3 $1/rofi $1/zathura $1/zsh 
+    mkdir $1 $1/vim $1/xorg $1/alacritty $1/dunst $1/i3 $1/rofi $1/zathura $1/zsh $1/selectMouseCursor $1/firewall
 
     #vim
     cp $vimfile $1/vim
@@ -40,6 +58,8 @@ configs_backup() {
     cp -r $home/.config/rofi/* $1/rofi
     cp -r $home/.config/zathura/* $1/zathura
     cp $home/.zshrc $1/zsh
+    cp /usr/share/icons/default/index.theme $1/selectMouseCursor
+    cp /etc/hosts $1/firewall/
 }
 
 if [[ $# -eq 2 ]] || [[ $# -eq 3 ]]; then

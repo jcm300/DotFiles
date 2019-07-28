@@ -1,3 +1,3 @@
 # Dunst
 
-Move file to ~/.config/dunst/
+Move files to ~/.config/dunst/

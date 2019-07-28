@@ -7,6 +7,8 @@ country=Portugal
 timezone=Europe/Lisbon
 locale=pt_PT.UTF-8
 hostname=asusS410UN
+username=jcm300
+cpu=intel #or amd
 
 escape_text_for_sed(){
     text="$1"
@@ -93,5 +95,35 @@ echo "127.0.0.1   localhost"$'\n'"::1         localhost"$'\n'"127.0.1.1   $hostn
 #Initramfs
 mkinitcpio -p linux
 
-#install all packages
-cat "my_packages" | xargs sudo pacman -S --noconfirm
+#Set root password
+passwd
+
+#Add a new user
+useradd -m -g users -G wheel -s /usr/bin/zsh $username
+
+#Set password to new user
+passwd $username
+
+#Install some necessary packages
+sudo pacman -S --noconfirm zsh vim networkmanager
+
+#Allow members of group wheel to execute any command
+sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
+
+#Change default shell to zsh
+chsh -s /usr/bin/zsh
+
+#Bootloader Installation
+bootctl install
+sudo pacman -S --noconfirm $cpu-ucode
+echo "title   Arch Linux" > /boot/loader/entries/arch.conf
+echo "linux   /vmlinuz-linux" >> /boot/loader/entries/arch.conf
+echo "initrd  /$cpu-ucode.img" >> /boot/loader/entries/arch.conf
+echo "initrd  /initramfs-linux.img" >> /boot/loader/entries/arch.conf
+echo "options root=/dev/sda2 rw" >> /boot/loader/entries/arch.conf
+echo "default  arch"$'\n'"timeout  4"$'\n'"editor   0" > /boot/loader/loader.conf
+
+#Reboot
+exit
+umount -R /mnt
+reboot
