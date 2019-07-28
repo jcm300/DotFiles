@@ -78,6 +78,7 @@ cd
 
 #Vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -c "PlugUpgrade" -c "PlugInstall" -c "PlugUpdate" -c ":q" -c ":q" ~/.vim/vimrc #install plugins
 
 #DisableTPM
 mv /mnt/configs/disableTPM/blacklist.conf /etc/modprobe.d/
