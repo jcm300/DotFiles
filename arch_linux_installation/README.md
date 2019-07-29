@@ -26,14 +26,16 @@ Reboot into usb pen with Arch Linux.
 
 Run script for base installation:
 ```
-mount /dev/sdxY /mnt #pen with scripts and backup
-./mnt/install.sh
+mkdir /mnt2
+mount /dev/sdxY /mnt2 #pen with scripts and backup
+/mnt2/install.sh
 ```
 
 Now the pc will reboot and you should go to the base arch linux installed instead of the arch linux bootable. There, you login and run:
 ```
 mount /dev/sdxY /mnt #pen with scripts and backup
-sudo ./mnt/setup.sh jcm300 /mnt #the first is the username, the last parameter is the path for the folder with backup
+su
+/mnt/setup.sh jcm300 /mnt #the first is the username, the last parameter is the path for the folder with backup and configs
 ```
 
 The pc will reboot one last time and the installation will be concluded. Now to start the graphical environment, login and run `startx`.
