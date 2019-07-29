@@ -6,15 +6,15 @@ partial_backup() {
     mkdir $bf_local/firefox
     cp -r /home/$username/.mozilla/firefox/*.default $bf_local/firefox
     cp /home/$username/.mozilla/firefox/profiles.ini $bf_local/firefox 
+    tar -cf firefox.tar -C $bf_local firefox
+    openssl aes-256-cbc -a -salt -pbkdf2 -in firefox.tar -out $bf_local/firefox.tar.aes
+    rm firefox.tar
+    rm -r $bf_local/firefox
 
     #thunderbird backup
     tar -cf thunderbird.tar -C $home .thunderbird
-    gpg -c thunderbird.tar
-    mv thunderbird.tar.gpg $bf_local
+    openssl aes-256-cbc -a -salt -pbkdf2 -in thunderbird.tar -out $bf_local/thunderbird.tar.aes
     rm thunderbird.tar
-    #extract
-    #gpg thunderbird.tar.gpg
-    #tar -xvf thunderbird.tar
 
     #home directory backup without hidden files on top-level
     mkdir $bf_home
@@ -24,27 +24,16 @@ partial_backup() {
     tar -cf keys.tar -C $home .gnupg .ssh
     openssl aes-256-cbc -a -salt -pbkdf2 -in keys.tar -out $bf_local/keys.tar.aes
     rm keys.tar
-    #extract
-    #openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
-    #tar -xvf keys.tar
 
     #NetworkManager
     sudo tar -cf networkManager.tar -C /etc/NetworkManager/ system-connections
-    gpg -c networkManager.tar
-    mv networkManager.tar.gpg $bf_local
+    openssl aes-256-cbc -a -salt -pbkdf2 -in networkManager.tar -out $bf_local/networkManager.tar.aes
     sudo rm networkManager.tar
-    #extract
-    #gpg networkManager.tar.gpg
-    #tar -xvf networkManager.tar
 
     #ProtonVPN
     sudo tar -cf protonVPN.tar -C $home .protonvpn-cli
-    gpg -c protonVPN.tar
-    mv protonVPN.tar.gpg $bf_local
+    openssl aes-256-cbc -a -salt -pbkdf2 -in protonVPN.tar -out $bf_local/protonVPN.tar.aes
     sudo rm protonVPN.tar
-    #extract
-    #gpg protonVPN.tar.gpg
-    #tar -xvf protonVPN.tar
 }
 
 configs_backup() {

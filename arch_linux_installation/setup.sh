@@ -11,8 +11,8 @@ if [[ $# -eq 2 ]]; then
 
     #network manager config
     cd $backup
-    echo "Insert passphrase for Network Manager gpg:"
-    gpg -d --passphrase-fd 0 --decrypt-files networkManager.tar.gpg
+    echo "Insert passphrase for Network Manager aes:"
+    openssl aes-256-cbc -d -a -salt -pbkdf2 -in networkManager.tar.aes -out networkManager.tar
     sudo tar -xf networkManager.tar
     sudo rm -r networkManager.tar
     sudo rm -r /etc/NetworkManager/system-connections
@@ -66,23 +66,27 @@ if [[ $# -eq 2 ]]; then
     cd $backup
     mkdir -p ~/.mozilla/
     sudo rm -r ~/.mozilla/firefox/
-    cp -r firefox ~/.mozilla/
-    echo "Insert passphrase for Thunderbird gpg:"
-    gpg -d --passphrase-fd 0 --decrypt-files thunderbird.tar.gpg
+    echo "Insert passphrase for Firefox aes:"
+    openssl aes-256-cbc -d -a -salt -pbkdf2 -in firefox.tar.aes -out firefox.tar
+    tar -xf firefox.tar
+    rm -r firefox.tar
+    mv firefox ~/.mozilla/
+    echo "Insert passphrase for Thunderbird aes:"
+    openssl aes-256-cbc -d -a -salt -pbkdf2 -in thunderbird.tar.aes -out thunderbird.tar
     tar -xf thunderbird.tar
     rm -r thunderbird.tar
     rm -r ~/.thunderbird
     mv .thunderbird ~/
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
-    tar -xvf keys.tar
+    tar -xf keys.tar
     rm -r keys.tar
     rm -r ~/.ssh
     rm -r ~/.gnupg
     mv .ssh ~/
     mv .gnupg ~/
     chmod 600 ~/.ssh/*
-    echo "Insert passphrase for ProtonVPN gpg:"
-    gpg -d --passphrase-fd 0 --decrypt-files protonVPN.tar.gpg
+    echo "Insert passphrase for ProtonVPN aes:"
+    openssl aes-256-cbc -d -a -salt -pbkdf2 -in protonVPN.tar.aes -out protonVPN.tar
     sudo tar -xf protonVPN.tar
     sudo rm -r protonVPN.tar
     sudo rm -r ~/.protonvpn-cli
@@ -117,7 +121,9 @@ if [[ $# -eq 2 ]]; then
 
     #HP Printer
     sudo pacman -S --noconfirm hplip
-    echo "Call hplip -i to setup a printer"
+    sudo systemctl start org.cups.cupsd.service
+    sudo systemctl enable org.cups.cupsd.service
+    echo "Go to http://localhost:631/ to add printer!"
     read -n 1
 
     #reboot
