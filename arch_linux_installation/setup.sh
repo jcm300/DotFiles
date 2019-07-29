@@ -85,6 +85,8 @@ if [[ $# -eq 2 ]]; then
     sudo find ~/.gnupg -type f -exec chmod 600 {} \;
     sudo find ~/.gnupg -type d -exec chmod 700 {} \;
     git config --global user.signingkey BA459457D597C33C
+    git config --global commit.gpgsign true
+    git config --global tag.gpgsign true
     echo "Insert passphrase for ProtonVPN gpg:"
     gpg -d --passphrase-fd 0 --decrypt-files protonVPN.tar.gpg
     sudo tar -xf protonVPN.tar
