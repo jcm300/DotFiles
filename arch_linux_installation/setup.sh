@@ -29,13 +29,13 @@ if [[ $# -eq 2 ]]; then
     sudo pacman -S --noconfirm git wget
     git clone https://aur.archlinux.org/yay-bin.git
     cd yay-bin
-    makepkg -si
+    makepkg -si --noconfirm
     cd
     sudo rm -r yay-bin
 
     #graphic environment
     sudo pacman -S --noconfirm xorg xorg-xinit xorg-twm mesa nvidia lib32-nvidia-utils bumblebee xf86-video-intel lib32-virtualgl
-    sudo passwd -a $username bumblebee
+    sudo gpasswd -a $username bumblebee
     sudo systemctl enable bumblebeed.service
 
     #Audio Drivers
@@ -46,7 +46,7 @@ if [[ $# -eq 2 ]]; then
 
     #Power Management
     sudo pacman -S --noconfirm tlp
-    tlp start
+    sudo tlp start
 
     #Screen brightness
     yay -S --noconfirm light-git
@@ -57,7 +57,7 @@ if [[ $# -eq 2 ]]; then
 
     #Oh-My-Zsh Installation
     chsh -s /usr/bin/zsh
-     sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
     #Install packages
     cat "$folder/packages" | xargs yay -S --noconfirm
@@ -94,13 +94,14 @@ if [[ $# -eq 2 ]]; then
     cd
 
     cd $folder/configs
-    cp xorg/* ~/
-    cp zsh/* ~/
+    cp xorg/.xinitrc ~/
+    cp zsh/.zshrc ~/
     cp -r alacritty dunst i3 rofi zathura ~/.config/
+    rm ~/.config/alacritty/README.md ~/.config/dunst/README.md ~/.config/i3/README.md ~/.config/rofi/README.md ~/.config/zathura/README.md
     mkdir ~/.vim
-    cp vim/* ~/.vim/
-    cp theme/* /usr/share/icons/default/
-    cp firewall/* /etc/
+    cp vim/vimrc ~/.vim/
+    sudo cp selectMouseCursor/index.theme /usr/share/icons/default/
+    sudo cp firewall/hosts /etc/
     cd
 
     #Vim-plug
@@ -113,7 +114,6 @@ if [[ $# -eq 2 ]]; then
 
     #Lock Screen
     sudo cp $folder/configs/lockScreen/lockScreen.service /etc/systemd/system/
-    sudo systemctl start lockScreen.service
     sudo systemctl enable lockScreen.service
 
     #Remove desktop folder from home
@@ -124,7 +124,6 @@ if [[ $# -eq 2 ]]; then
     sudo systemctl start org.cups.cupsd.service
     sudo systemctl enable org.cups.cupsd.service
     echo "Go to http://localhost:631/ to add printer!"
-    read -n 1
 
     #reboot
     reboot
