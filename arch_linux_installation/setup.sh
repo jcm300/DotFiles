@@ -77,6 +77,7 @@ if [[ $# -eq 2 ]]; then
     rm -r thunderbird.tar
     rm -r ~/.thunderbird
     mv .thunderbird ~/
+    echo "Insert passphrase for Keys aes:"
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
     tar -xf keys.tar
     rm -r keys.tar
