@@ -4,6 +4,8 @@ if [[ $# -eq 2 ]]; then
     username=$1
     folder=$2
     backup=$folder/backup/
+    email=zeclmartins@gmail.com
+    ssid=Vodafone-2BBD47
 
     #Fix r8822be wifi problem
     sudo cp $folder/configs/wifiProblemFix/50-r8822be.conf /etc/modprobe.d/
@@ -19,11 +21,13 @@ if [[ $# -eq 2 ]]; then
     sudo rm -r /etc/NetworkManager/system-connections
     sudo mv system-connections /etc/NetworkManager/
     sudo chmod 600 /etc/NetworkManager/system-connections
+    echo "Root password:"
     su -c "chmod 600 /etc/NetworkManager/system-connections/*"
     sudo systemctl start NetworkManager.service
     sudo systemctl enable NetworkManager.service
-    #echo "Connect to wifi:"
-    #nmcli device wifi connect Vodafone-2BBD47 --ask
+    sleep 5
+    echo "Connect to wifi:"
+    nmcli device wifi connect $ssid --ask
     cd
 
     #Configure AUR and multilib
@@ -61,7 +65,9 @@ if [[ $# -eq 2 ]]; then
 
     #Oh-My-Zsh Installation
     chsh -s /usr/bin/zsh
-    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    sh install.sh --unattended
+    rm install.sh
 
     #Install packages
     cat "$folder/packages" | xargs yay -S --noconfirm
@@ -96,16 +102,21 @@ if [[ $# -eq 2 ]]; then
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/*
     chmod 644 ~/.ssh/*.pub
+    git config --global user.name "$username"
+    git config --global user.email "$email"
     find ~/.gnupg -type f -exec chmod 600 {} \;
     find ~/.gnupg -type d -exec chmod 700 {} \;
+    git config --global user.signingkey BA459457D597C33C
+    git config --global commit.gpgsign true
+    git config --global tag.gpgsign true
     echo "Insert passphrase for ProtonVPN aes:"
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in protonVPN.tar.aes -out protonVPN.tar
     sudo tar -xf protonVPN.tar
     sudo rm -r protonVPN.tar
     sudo rm -r ~/.protonvpn-cli
     sudo mv .protonvpn-cli ~/
-    find ~/.protonvpn-cli -type f -exec chmod 600 {} \;
-    find ~/.protonvpn-cli -type d -exec chmod 700 {} \;
+    sudo find ~/.protonvpn-cli -type f -exec chmod 600 {} \;
+    sudo find ~/.protonvpn-cli -type d -exec chmod 700 {} \;
     cd
 
     cd $folder/configs

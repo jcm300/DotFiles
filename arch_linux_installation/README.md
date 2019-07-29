@@ -33,8 +33,7 @@ mount /dev/sdxY /mnt2 #pen with scripts and backup
 
 Now the pc will reboot and you should go to the base arch linux installed instead of the arch linux bootable. There, you login and run:
 ```
-mount /dev/sdxY /mnt #pen with scripts and backup
-su
+sudo mount /dev/sdxY /mnt #pen with scripts and backup
 /mnt/setup.sh jcm300 /mnt #the first is the username, the last parameter is the path for the folder with backup and configs
 ```
 
