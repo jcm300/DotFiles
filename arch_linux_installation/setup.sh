@@ -22,8 +22,8 @@ if [[ $# -eq 2 ]]; then
     su -c "chmod 600 /etc/NetworkManager/system-connections/*"
     sudo systemctl start NetworkManager.service
     sudo systemctl enable NetworkManager.service
-    echo "Connect to wifi:"
-    nmcli device wifi connect Vodafone-2BBD47 --ask
+    #echo "Connect to wifi:"
+    #nmcli device wifi connect Vodafone-2BBD47 --ask
     cd
 
     #Configure AUR and multilib
