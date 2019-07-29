@@ -7,6 +7,7 @@ if [[ $# -eq 2 ]]; then
 
     #Fix r8822be wifi problem
     sudo cp $folder/configs/wifiProblemFix/50-r8822be.conf /etc/modprobe.d/
+    sudo chmod 644 /etc/modprobe.d/50-r8822be.conf
     sudo mkinitcpio -p linux
 
     #network manager config
@@ -17,6 +18,8 @@ if [[ $# -eq 2 ]]; then
     sudo rm -r networkManager.tar
     sudo rm -r /etc/NetworkManager/system-connections
     sudo mv system-connections /etc/NetworkManager/
+    sudo chmod 600 /etc/NetworkManager/system-connections
+    su -c "chmod 600 /etc/NetworkManager/system-connections/*"
     sudo systemctl start NetworkManager.service
     sudo systemctl enable NetworkManager.service
     echo "Connect to wifi:"
@@ -25,6 +28,7 @@ if [[ $# -eq 2 ]]; then
 
     #Configure AUR and multilib
     sudo cp $folder/pacman.conf /etc/pacman.conf
+    sudo chmod 644 /etc/pacman.conf
     sudo pacman -Syu --noconfirm
     sudo pacman -S --noconfirm git wget
     git clone https://aur.archlinux.org/yay-bin.git
@@ -71,12 +75,16 @@ if [[ $# -eq 2 ]]; then
     tar -xf firefox.tar
     rm -r firefox.tar
     mv firefox ~/.mozilla/
+    find ~/.mozilla -type f -exec chmod 600 {} \;
+    find ~/.mozilla -type d -exec chmod 700 {} \;
     echo "Insert passphrase for Thunderbird aes:"
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in thunderbird.tar.aes -out thunderbird.tar
     tar -xf thunderbird.tar
     rm -r thunderbird.tar
     rm -r ~/.thunderbird
     mv .thunderbird ~/
+    find ~/.thunderbird -type f -exec chmod 600 {} \;
+    find ~/.thunderbird -type d -exec chmod 700 {} \;
     echo "Insert passphrase for Keys aes:"
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in keys.tar.aes -out keys.tar
     tar -xf keys.tar
@@ -85,24 +93,45 @@ if [[ $# -eq 2 ]]; then
     rm -r ~/.gnupg
     mv .ssh ~/
     mv .gnupg ~/
+    chmod 700 ~/.ssh
     chmod 600 ~/.ssh/*
+    chmod 644 ~/.ssh/*.pub
+    find ~/.gnupg -type f -exec chmod 600 {} \;
+    find ~/.gnupg -type d -exec chmod 700 {} \;
     echo "Insert passphrase for ProtonVPN aes:"
     openssl aes-256-cbc -d -a -salt -pbkdf2 -in protonVPN.tar.aes -out protonVPN.tar
     sudo tar -xf protonVPN.tar
     sudo rm -r protonVPN.tar
     sudo rm -r ~/.protonvpn-cli
     sudo mv .protonvpn-cli ~/
+    find ~/.protonvpn-cli -type f -exec chmod 600 {} \;
+    find ~/.protonvpn-cli -type d -exec chmod 700 {} \;
     cd
 
     cd $folder/configs
     cp xorg/.xinitrc ~/
+    chmod 755 ~/.xinitrc
     cp zsh/.zshrc ~/
+    chmod 644 ~/.zshrc
     cp -r alacritty dunst i3 rofi zathura ~/.config/
     rm ~/.config/alacritty/README.md ~/.config/dunst/README.md ~/.config/i3/README.md ~/.config/rofi/README.md ~/.config/zathura/README.md
+    chmod 644 ~/.config/alacritty/alacritty.yml
+    chmod 644 ~/.config/dunst/dunstrc
+    chmod 755 ~/.config/dunst/lowBattery.sh
+    chmod 644 ~/.config/i3/*
+    chmod 755 ~/.config/i3/battery
+    chmod 755 ~/.config/i3/genQRCodeFromClipboard
+    chmod 755 ~/.config/i3/toggletouchpad
+    chmod 755 ~/.config/i3/volume
+    chmod 644 ~/.config/rofi/config
+    chmod 644 ~/.config/zathura/zathurarc
     mkdir ~/.vim
     cp vim/vimrc ~/.vim/
+    chmod 644 ~/.vim/vimrc
     sudo cp selectMouseCursor/index.theme /usr/share/icons/default/
+    sudo chmod 644 /usr/share/icons/default/index.theme
     sudo cp firewall/hosts /etc/
+    sudo chmod 644 /etc/hosts
     cd
 
     #Vim-plug
@@ -111,14 +140,17 @@ if [[ $# -eq 2 ]]; then
 
     #DisableTPM
     sudo cp $folder/configs/disableTPM/blacklist.conf /etc/modprobe.d/
+    sudo chmod 644 /etc/modprobe.d/blacklist.conf
     sudo mkinitcpio -p linux
 
     #Lock Screen
     sudo cp $folder/configs/lockScreen/lockScreen.service /etc/systemd/system/
+    sudo chmod 644 /etc/systemd/system/lockScreen.service
     sudo systemctl enable lockScreen.service
 
     #Remove desktop folder from home
     cp $folder/configs/removeDesktopFolder/user-dirs.dirs ~/.config/
+    chmod 644 ~/.config/user-dirs.dirs
 
     #Copy home backup
     cp -r $backup/home/* ~/
