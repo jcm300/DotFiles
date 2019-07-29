@@ -25,7 +25,7 @@ if [[ $# -eq 2 ]]; then
     su -c "chmod 600 /etc/NetworkManager/system-connections/*"
     sudo systemctl start NetworkManager.service
     sudo systemctl enable NetworkManager.service
-    sleep 5
+    sleep 10
     echo "Connect to wifi:"
     nmcli device wifi connect $ssid --ask
     cd
