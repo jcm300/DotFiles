@@ -1,8 +1,11 @@
 #!/bin/bash
 
 partial_backup() {
+
     #firefox backup
-    cp -r /home/$username/.mozilla/firefox/*.default $bf_local
+    mkdir $bf_local/firefox
+    cp -r /home/$username/.mozilla/firefox/*.default $bf_local/firefox
+    cp /home/$username/.mozilla/firefox/profiles.ini $bf_local/firefox 
 
     #thunderbird backup
     tar -cf thunderbird.tar -C $home .thunderbird

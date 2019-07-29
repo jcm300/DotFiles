@@ -4,7 +4,6 @@ if [[ $# -eq 2 ]]; then
     username=$1
     folder=$2
     backup=$folder/backup/
-    ssid=Vodafone-2BBD47
 
     #Fix r8822be wifi problem
     sudo cp $folder/configs/wifiProblemFix/50-r8822be.conf /etc/modprobe.d/
@@ -21,7 +20,7 @@ if [[ $# -eq 2 ]]; then
     sudo systemctl start NetworkManager.service
     sudo systemctl enable NetworkManager.service
     echo "Connect to wifi:"
-    nmcli device wifi connect $ssid --ask
+    nmcli device wifi connect Vodafone-2BBD47 --ask
     cd
 
     #Configure AUR and multilib
@@ -58,16 +57,16 @@ if [[ $# -eq 2 ]]; then
 
     #Oh-My-Zsh Installation
     chsh -s /usr/bin/zsh
-    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+     sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
     #Install packages
     cat "$folder/packages" | xargs yay -S --noconfirm
 
     #Configs
     cd $backup
-    mkdir -p ~/.mozilla/firefox/
-    sudo rm -r ~/.mozilla/firefox/*.default
-    cp -r *.default ~/.mozilla/firefox/
+    mkdir -p ~/.mozilla/
+    sudo rm -r ~/.mozilla/firefox/
+    cp -r firefox ~/.mozilla/
     echo "Insert passphrase for Thunderbird gpg:"
     gpg -d --passphrase-fd 0 --decrypt-files thunderbird.tar.gpg
     tar -xf thunderbird.tar
@@ -82,11 +81,6 @@ if [[ $# -eq 2 ]]; then
     mv .ssh ~/
     mv .gnupg ~/
     chmod 600 ~/.ssh/*
-    sudo find ~/.gnupg -type f -exec chmod 600 {} \;
-    sudo find ~/.gnupg -type d -exec chmod 700 {} \;
-    git config --global user.signingkey BA459457D597C33C
-    git config --global commit.gpgsign true
-    git config --global tag.gpgsign true
     echo "Insert passphrase for ProtonVPN gpg:"
     gpg -d --passphrase-fd 0 --decrypt-files protonVPN.tar.gpg
     sudo tar -xf protonVPN.tar
