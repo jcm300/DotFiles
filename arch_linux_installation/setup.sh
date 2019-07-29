@@ -119,6 +119,9 @@ if [[ $# -eq 2 ]]; then
     #Remove desktop folder from home
     cp $folder/configs/removeDesktopFolder/user-dirs.dirs ~/.config/
 
+    #Copy home backup
+    cp -r $backup/home/* ~/
+
     #HP Printer
     sudo pacman -S --noconfirm hplip
     sudo systemctl start org.cups.cupsd.service
