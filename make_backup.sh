@@ -34,6 +34,9 @@ partial_backup() {
     sudo tar -cf protonVPN.tar -C $home .protonvpn-cli
     openssl aes-256-cbc -a -salt -pbkdf2 -in protonVPN.tar -out $bf_local/protonVPN.tar.aes
     sudo rm protonVPN.tar
+
+    #WakaTime
+    cp /home/$username/.wakatime.cfg $bf_local/
 }
 
 configs_backup() {

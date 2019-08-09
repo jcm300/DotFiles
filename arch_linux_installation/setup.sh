@@ -40,6 +40,7 @@ if [[ $# -eq 2 ]]; then
     makepkg -si --noconfirm
     cd
     sudo rm -r yay-bin
+    sudo pacman -Syy && sudo pacman -S --noconfirm archlinuxcn-keyring
 
     #graphic environment
     sudo pacman -S --noconfirm xorg xorg-xinit xorg-twm mesa nvidia lib32-nvidia-utils bumblebee xf86-video-intel lib32-virtualgl
@@ -165,6 +166,12 @@ if [[ $# -eq 2 ]]; then
 
     #Copy home backup
     cp -r $backup/home/* ~/
+
+    #WakaTime
+    yay -S --noconfirm python python-pip
+    sudo pip install wakatime
+    cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/sobolevn/wakatime-zsh-plugin.git wakatime
+    cp $backup/.wakatime.cfg ~/
 
     #HP Printer
     sudo pacman -S --noconfirm hplip
