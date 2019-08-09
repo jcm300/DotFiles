@@ -113,5 +113,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'itchyny/lightline.vim'
 "vue highlight
 Plug 'posva/vim-vue'
+"WakaTime
+Plug 'wakatime/vim-wakatime'
 
 call plug#end() 

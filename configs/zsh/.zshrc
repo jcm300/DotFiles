@@ -2,6 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+export PATH=$PATH:/opt/graphdb-free-8.9.0/bin
+
 # Path to your oh-my-zsh installation.
   export ZSH=/home/jcm300/.oh-my-zsh
   export EDITOR=vim
@@ -52,7 +54,7 @@ ZSH_THEME="arrow"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git wakatime)
 
 source $ZSH/oh-my-zsh.sh
 
