@@ -31,6 +31,8 @@ if [[ $# -eq 1 ]]; then
     read -sp 'GitHub Password (If you have 2FA enabled use a "personal access token" (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)): ' github_password
     echo
 
+    echo
+
     ## Get user repositories from GitLab
 
     gitlab_reps=""
@@ -67,7 +69,7 @@ if [[ $# -eq 1 ]]; then
         for user in $gitlab_users; do
             i=1
             reps=$(curl -s "https://gitlab.com/api/v4/users/$user/projects?private_token=$gitlab_password&page=$i" | grep -Po "\"path_with_namespace\":\"\K[^\"]*")
-            gitlab_reps=$gitlab_reps$'\n'$reps
+            gitlab_reps=$gitlab_reps$reps
             while [[ $reps != "" ]]; do
                 i=$((i+1))
                 reps=$(curl -s "https://gitlab.com/api/v4/users/$user/projects?private_token=$gitlab_password&page=$i" | grep -Po "\"path_with_namespace\":\"\K[^\"]*")
@@ -79,7 +81,7 @@ if [[ $# -eq 1 ]]; then
         for group in $gitlab_groups; do
             i=1
             reps=$(curl -s "https://gitlab.com/api/v4/groups/$group/projects?private_token=$gitlab_password&page=$i" | grep -Po "\"path_with_namespace\":\"\K[^\"]*")
-            gitlab_reps=$gitlab_reps$'\n'$reps
+            gitlab_reps=$gitlab_reps$reps
             while [[ $reps != "" ]]; do
                 i=$((i+1))
                 reps=$(curl -s "https://gitlab.com/api/v4/users/$group/projects?private_token=$gitlab_password&page=$i" | grep -Po "\"path_with_namespace\":\"\K[^\"]*")
@@ -108,20 +110,43 @@ if [[ $# -eq 1 ]]; then
 
     for rep in $gitlab_reps; do
         folder=gitlab_$(echo $rep | sed "s/\//_/g")
-        git clone https://$github_username:$gitlab_password@gitlab.com/$rep.git $folder
-        cd $folder
-        git remote set-url origin https://gitlab.com/$rep.git
-        cd ..
+
+        if [ ! -d $folder ]; then
+            git clone https://$gitlab_username:$gitlab_password@gitlab.com/$rep.git $folder
+            cd $folder
+            git remote set-url origin https://gitlab.com/$rep.git
+            cd ..
+        else
+            cd $folder
+            git remote set-url origin https://$gitlab_username:$gitlab_password@gitlab.com/$rep.git    
+            git pull --all
+            git remote set-url origin https://gitlab.com/$rep.git
+            cd ..
+        fi
     done
 
     for rep in $github_reps; do
         folder=github_$(echo $rep | sed "s/\//_/g")
-        git clone https://$github_username:$gitlab_password@github.com/$rep.git $folder
-        cd $folder
-        git remote set-url origin https://github.com/$rep.git
-        cd ..
+
+        if [ ! -d $folder ]; then
+            git clone https://$github_username:$github_password@github.com/$rep.git $folder
+            cd $folder
+            git remote set-url origin https://github.com/$rep.git
+            cd ..
+        else
+            cd $folder
+            git remote set-url origin https://$github_username:$github_password@github.com/$rep.git    
+            git pull --all
+            git remote set-url origin https://github.com/$rep.git
+            cd ..
+        fi
     done
 
+    echo
+    echo "GitLab Repositories Backup:"
+    echo "$gitlab_reps"
+    echo "GitHub Repositories Backup:"
+    echo "$github_reps"
     echo "Backup exit with success!"
 else
     echo "Usage: ./backup_reps.sh <path for backup>"
