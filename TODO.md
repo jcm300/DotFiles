@@ -10,3 +10,6 @@ Add one more parameter so user can choose what the script do:
 ## arch_linux_installation
 
 Improve script, make more customizable.
+
+## backup_reps
+- fix git pull --all (not merge the other local branches)
