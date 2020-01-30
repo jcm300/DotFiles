@@ -43,7 +43,7 @@ if [[ $# -eq 2 ]]; then
     sudo pacman -Syy && sudo pacman -S --noconfirm archlinuxcn-keyring
 
     #graphic environment
-    sudo pacman -S --noconfirm xorg xorg-xinit xorg-twm mesa nvidia lib32-nvidia-utils bumblebee xf86-video-intel lib32-virtualgl
+    sudo pacman -S --noconfirm xorg xorg-xinit xorg-twm mesa nvidia lib32-nvidia-utils bumblebee bbswitch lib32-virtualgl
     sudo gpasswd -a $username bumblebee
     sudo systemctl enable bumblebeed.service
 
