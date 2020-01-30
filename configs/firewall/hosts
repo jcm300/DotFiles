@@ -3331,7 +3331,7 @@ ff02::3 ip6-allhosts
 0.0.0.0 mng1.clickalyzer.com
 0.0.0.0 monetizer.com-01.site
 0.0.0.0 monster.gostats.com
-0.0.0.0 mpsnare.iesnare.com
+# 0.0.0.0 mpsnare.iesnare.com
 0.0.0.0 mpsnare.iesnare.co.uk
 0.0.0.0 msn1.com
 0.0.0.0 msnm.com
@@ -21965,9 +21965,9 @@ ff02::3 ip6-allhosts
 0.0.0.0 4684100.fls.doubleclick.net
 0.0.0.0 fls.au.doubleclick.net
 0.0.0.0 www.doubleclickbygoogle.com
-0.0.0.0 google-analytics.com
-0.0.0.0 ssl.google-analytics.com
-0.0.0.0 www.google-analytics.com  #[affects Google Trends]
+# 0.0.0.0 google-analytics.com
+# 0.0.0.0 ssl.google-analytics.com
+# 0.0.0.0 www.google-analytics.com  #[affects Google Trends]
 0.0.0.0 4.afs.googleadservices.com
 0.0.0.0 pagead2.googleadservices.com
 0.0.0.0 partner.googleadservices.com
@@ -30404,7 +30404,7 @@ ff02::3 ip6-allhosts
 0.0.0.0 wt-eu02.net
 0.0.0.0 wtlive.com
 0.0.0.0 www-banner.chat.ru
-0.0.0.0 www-google-analytics.l.google.com
+# 0.0.0.0 www-google-analytics.l.google.com
 0.0.0.0 www.banner-link.com.br
 0.0.0.0 www.dnps.com
 0.0.0.0 www.kaplanindex.com
@@ -53979,7 +53979,7 @@ ff02::3 ip6-allhosts
 0.0.0.0 aol.gscontxt.net
 0.0.0.0 vice-useast.gscontxt.net
 0.0.0.0 js.hscta.net
-0.0.0.0 js.hsforms.net
+#0.0.0.0 js.hsforms.net
 0.0.0.0 analytics.ihgip.net
 0.0.0.0 www.analytics.ihgip.net
 0.0.0.0 imprev.net
