@@ -2,11 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-export PATH=$PATH:/opt/graphdb-free-8.9.0/bin
+export PATH=$PATH:/opt/graphdb-free-8.9.0/bin:/home/jcm300/.gem/ruby/2.7.0/bin
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/jcm300/.oh-my-zsh
-  export EDITOR=vim
+export ZSH=/home/jcm300/.oh-my-zsh
+export EDITOR=vim
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -87,5 +88,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Disable ZSH SSH Hosts file Completion
-zstyle ':completion:*:ssh:*' hosts off
+# Disable ZSH Hosts file Completion
+zstyle ':completion:*:(ssh|scp|rsync):*' hosts off
